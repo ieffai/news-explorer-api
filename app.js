@@ -7,11 +7,9 @@ const cookieParser = require('cookie-parser');
 const app = express();
 
 const { PORT, DB_LINK } = require('./config');
-const { createUser, login } = require('./controllers/users');
 const {
-  errorMiddleware, auth, limiter,
+  errorMiddleware, limiter,
   errLogger, reqLogger,
-  signIn, signUp,
 } = require('./middlewares');
 const router = require('./routes');
 
@@ -27,12 +25,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(reqLogger);
 app.use(limiter);
-
-
-app.post('/signup', signUp, createUser);
-app.post('/signin', signIn, login);
-
-app.use(auth);
 app.use(router);
 
 app.use(errLogger);
