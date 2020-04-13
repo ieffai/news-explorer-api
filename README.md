@@ -14,9 +14,10 @@ Backend part.
 
 * **Links**
 
-  https://84.201.173.59
-  http://api.olehadash.xyz/
-  http://www.api.olehadash.xyz/
+  http://api.olehadash.xyz/ <br />
+  https://api.olehadash.xyz/ <br />
+  http://www.api.olehadash.xyz/ <br />
+  https://www.api.olehadash.xyz/
 
 * **Local deploy**
 
