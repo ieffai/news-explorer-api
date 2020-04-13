@@ -13,7 +13,7 @@ const {
   errLogger, reqLogger,
   signIn, signUp,
 } = require('./middlewares');
-const { usersRouter, articlesRouter, errorRouter } = require('./routes');
+const router = require('./routes');
 
 mongoose.connect(DB_LINK, {
   useNewUrlParser: true,
@@ -28,15 +28,14 @@ app.use(cookieParser());
 app.use(reqLogger);
 app.use(limiter);
 
+
 app.post('/signup', signUp, createUser);
 app.post('/signin', signIn, login);
 
 app.use(auth);
-app.use('/users', usersRouter);
-app.use('/articles', articlesRouter);
+app.use(router);
 
 app.use(errLogger);
-app.use('/', errorRouter);
 app.use(errorMiddleware);
 
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
