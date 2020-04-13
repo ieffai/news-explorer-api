@@ -25,27 +25,15 @@ Backend part.
   3. npm i install
   4. npm run start || npm run dev (hot reload)
 
-* **Method:**
-  
- `POST`
-  
-* **URL Params**
-
-    /signup
-
-* **Data Params**
-
-  `{ "email":"", "password":"", "name":"" }`
-
+* **Method:**         `POST` 
+* **URL Params:**     /signup
+* **Data Params:**    `{ "email":"", "password":"", "name":"" }`
 * **Success Response:**
-  
-  * **Code:** 201 <br />
-    **Content:** `{ "email":"", "name":"" }`
- 
+  * **Code:**         201 <br />
+    **Content:**      `{ "email":"", "name":"" }` 
 * **Error Response:**
-
-  * **Code:** 400 BAD REQUEST | 409 CONFLICT  <br />
-    **Content:** `{ "message": "depends on error" }`
+  * **Code:**         400 BAD REQUEST | 409 CONFLICT  <br />
+    **Content:**      `{ "message": "depends on error" }`
 
 * **Method:**
   
