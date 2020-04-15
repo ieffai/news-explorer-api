@@ -1,17 +1,24 @@
-const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 
-const error = require('../errors/Errors');
-const message = require('../errors/messages');
+const error = require('../helpers');
+const message = require('../constants');
 
 module.exports.createUser = (req, res, next) => {
-  const { email, name } = req.body;
-  bcrypt
-    .hash(req.body.password, 10)
-    .then((hash) => User.create({ email, password: hash, name }))
+  const { email, password, name } = req.body;
+  User.create({ email, password, name })
     .then(() => { res.status(201).send({ name, email }); })
-    .catch(() => next(new error.DBconflict(message.DB_CONFLICT)));
+    .catch((err) => {
+      if (err.code === 11000) {
+        next(new error.DBconflict(message.DB_CONFLICT));
+      } else if (err.message === 'user validation failed: name: Неправильный формат имени') {
+        next(new error.BadRequest(message.BAD_NAME));
+      } else if (err.message === 'user validation failed: email: Неправильный формат почты') {
+        next(new error.BadRequest(message.BAD_EMAIL));
+      } else {
+        next(new error.BadRequest(message.SHORT_PASS));
+      }
+    });
 };
 
 module.exports.getUser = (req, res, next) => {
