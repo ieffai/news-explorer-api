@@ -1,0 +1,20 @@
+const {
+  ITEM_NOT_FOUND, BAD_REQUEST, DB_CONFLICT,
+  BAD_ID, BAD_EMAIL, BAD_NAME,
+  BAD_PASS, SHORT_PASS, BAD_URL,
+  BAD_LOGIN, FORBIDDEN,
+} = require('./ErrorMessages');
+
+module.exports = {
+  ITEM_NOT_FOUND,
+  BAD_REQUEST,
+  DB_CONFLICT,
+  BAD_ID,
+  BAD_EMAIL,
+  BAD_NAME,
+  BAD_PASS,
+  SHORT_PASS,
+  BAD_URL,
+  BAD_LOGIN,
+  FORBIDDEN,
+};
