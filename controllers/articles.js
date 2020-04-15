@@ -1,7 +1,6 @@
 const Article = require('../models/article');
-const error = require('../errors/Errors');
-const message = require('../errors/messages');
-
+const error = require('../helpers');
+const message = require('../constants');
 
 module.exports.getArticles = (req, res, next) => {
   Article.find({})
