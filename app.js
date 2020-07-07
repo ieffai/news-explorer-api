@@ -3,6 +3,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
+const cors = require('cors');
 
 const app = express();
 
@@ -13,24 +14,29 @@ const {
 } = require('./middlewares');
 const router = require('./routes');
 
+const allowedCors = [
+  'localhost:8080'
+];
+
+const corsProps = {
+  origin: (origin, callback) => {
+    if (allowedCors.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true,
+};
+app.use(cors(corsProps));
 mongoose.connect(DB_LINK, {
   useNewUrlParser: true,
   useCreateIndex: true,
   useFindAndModify: false,
 });
 
-const allowedCors = [
-  'localhost:8080'
-];
 
-app.use(function(req, res, next) {
-  const { origin } = req.headers; // Записываем в переменную origin соответствующий заголовок
 
-  if (allowedCors.includes(origin)) { // Проверяем, что значение origin есть среди разрешённых доменов
-      res.header('Access-Control-Allow-Origin', origin);
-  }
-  next();
-});
 
 app.use(helmet());
 app.use(bodyParser.json());
