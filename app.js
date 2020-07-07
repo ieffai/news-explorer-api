@@ -20,7 +20,7 @@ mongoose.connect(DB_LINK, {
 });
 
 const allowedCors = [
-  'localhost:3000'
+  'localhost:8080'
 ];
 
 app.use(function(req, res, next) {
