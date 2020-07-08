@@ -13,31 +13,20 @@ const {
   errLogger, reqLogger,
 } = require('./middlewares');
 const router = require('./routes');
-
-const allowedCors = [
-  'localhost:8080'
-];
-
-const corsProps = {
-  origin: (origin, callback) => {
-    if (allowedCors.indexOf(origin) !== -1) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
+const corsOptions = {
+  origin: [
+    "http://localhost:8080",
+    "https://ieffai.github.io/news-explorer-frontend/",
+  ],
   credentials: true,
 };
-app.use(cors(corsProps));
+
+app.use(cors(corsOptions));
 mongoose.connect(DB_LINK, {
   useNewUrlParser: true,
   useCreateIndex: true,
   useFindAndModify: false,
 });
-
-
-
-
 app.use(helmet());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
