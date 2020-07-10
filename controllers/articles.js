@@ -15,8 +15,15 @@ module.exports.createArticle = (req, res, next) => {
   Article.create({
     keyword, title, text, date, source, link, image, owner: req.user._id,
   })
-    .then(() => res.status(201).send({
-      keyword, title, text, date, source, link, image,
+    .then((articles) => res.status(201).send({
+        _id: articles._id,
+        keyword: articles.keyword,
+        title: articles.title,
+        text: articles.text,
+        date: articles.date,
+        source: articles.source,
+        link: articles.link,
+        image: articles.image
     }))
     .catch(next);
 };
