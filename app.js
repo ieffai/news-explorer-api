@@ -17,6 +17,8 @@ const corsOptions = {
   origin: [
     "http://localhost:8080",
     "https://ieffai.github.io/news-explorer-frontend/",
+    "https://olehadash.xyz/",
+    "http://olehadash.xyz/",
   ],
   credentials: true,
 };
