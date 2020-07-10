@@ -24,7 +24,7 @@ module.exports.createUser = (req, res, next) => {
 module.exports.getUser = (req, res, next) => {
   User.findById(req.user._id)
     .orFail(() => { throw new error.NotFound(message.ITEM_NOT_FOUND); })
-    .then((user) => res.send({ user }))
+    .then((user) => res.send({ name: user.name, email: user.email }))
     .catch(next);
 };
 
@@ -39,13 +39,14 @@ module.exports.login = (req, res, next) => {
         JWT_SECRET,
         { expiresIn: '7d' },
       );
+      const { name } = user;
       res
         .cookie('jwt', token, {
           maxAge: 3600000 * 24 * 7,
           httpOnly: true,
           sameSite: true,
         })
-        .send({ message: `Привет ${user.name}!` });
+        .send({ name, token });
     })
     .catch(() => next(new error.Unauthorized(message.BAD_LOGIN)));
 };
