@@ -40,13 +40,13 @@ module.exports.login = (req, res, next) => {
         { expiresIn: '7d' },
       );
       const { name } = user;
-      res
-        .cookie('jwt', token, {
-          maxAge: 3600000 * 24 * 7,
-          httpOnly: true,
-          sameSite: true,
-        })
-        .send({ name, token });
+      // res
+      //   .cookie('jwt', token, {
+      //     maxAge: 3600000 * 24 * 7,
+      //     httpOnly: true,
+      //     sameSite: true,
+      //   })
+        res.send({ name, token });
     })
     .catch(() => next(new error.Unauthorized(message.BAD_LOGIN)));
 };
