@@ -15,10 +15,12 @@ const {
 const router = require('./routes');
 const corsOptions = {
   origin: [
-    "http://localhost:8080",
-    "https://ieffai.github.io/news-explorer-frontend/",
-    "https://olehadash.xyz/",
-    "http://olehadash.xyz/",
+    'http://localhost:8080',
+    'https://ieffai.github.io',
+    'https://olehadash.xyz',
+    'http://olehadash.xyz',
+    'https://www.olehadash.xyz',
+    'http://www.olehadash.xyz',
   ],
   credentials: true,
 };
