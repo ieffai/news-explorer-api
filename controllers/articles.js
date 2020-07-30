@@ -3,7 +3,7 @@ const error = require('../helpers');
 const message = require('../constants');
 
 module.exports.getArticles = (req, res, next) => {
-  Article.find({})
+  Article.find({owner: req.user._id})
     .then((articles) => res.send({ data: articles }))
     .catch(next);
 };
